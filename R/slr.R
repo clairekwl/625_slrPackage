@@ -8,7 +8,7 @@
 #   Check Package:             'Cmd + Shift + E'
 #   Test Package:              'Cmd + Shift + T'
 
-# final function - outputs table
+# final function returns table of main SLR outputs
 slr_output <- function(x, y) {
   n = length(x)
 
