@@ -1,12 +1,14 @@
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Install Package:           'Cmd + Shift + B'
-#   Check Package:             'Cmd + Shift + E'
-#   Test Package:              'Cmd + Shift + T'
+#' Personal greeting
+#'
+#' @description Greet a person and appropriately capitalize their name.
+#'
+#' @param name Your name (character string; e.g. "john doe").
+#'
+#' @return A character string, capitalized to title case.
+#' @export
+#'
+#' @examples
+#' hello("james bond")
 
 # final function returns table of main SLR outputs
 slr_output <- function(x, y) {
@@ -46,7 +48,7 @@ slr_output <- function(x, y) {
 
   # generate output table
   Name <- c("Beta 0", "Beta 1", "Std Error (Beta 1)", "F Stat",
-            "P-Value of F stat", "T Stat (Beta 1)", "P-value of T stat")
+            "P-Value (F)", "T Stat (Beta 1)", "P-Value (T)")
   Estimate <- c(b0_hat, b1_hat, se_b1_hat, f_stat, f_pval, t_stat, t_pval)
   output <- data.frame(Name, Estimate)
 
