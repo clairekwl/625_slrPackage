@@ -14,6 +14,24 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 ```{r setup}
 library(slrPackage)
+```
+
+To use the function `slr_output`:
+```{r}
+# load sample R dataset
+data(mtcars)
+# running function: slr_output(predictor, outcome)
+slr_output(mtcars$disp, mtcars$wt)
+```
+
+To use its results to add the least squares regression line to a plot:
+```{r}
+intercept = slr_output(mtcars$disp, mtcars$wt)[1, 2]
+slope = slr_output(mtcars$disp, mtcars$wt)[2, 2]
+
+plot(mtcars$disp, mtcars$wt)
+abline(intercept, slope)
 ```
