@@ -1,16 +1,17 @@
-#' Personal greeting
+#' Simple Linear Regression
 #'
-#' @description Greet a person and appropriately capitalize their name.
+#' @description Used to carry out simple linear regression.
 #'
-#' @param name Your name (character string; e.g. "john doe").
+#' @param x The predictor variable.
+#' @param y The outcome variable.
 #'
-#' @return A character string, capitalized to title case.
+#' @return The intercept and slope estimates, standard error, f and t statistics and p-values.
 #' @export
 #'
 #' @examples
-#' hello("james bond")
+#' data(mtcars)
+#' slr_output(mtcars$disp, mtcars$wt)
 
-# final function returns table of main SLR outputs
 slr_output <- function(x, y) {
   n = length(x)
 
