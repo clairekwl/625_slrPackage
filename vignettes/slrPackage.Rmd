@@ -35,3 +35,54 @@ slope = slr_output(mtcars$disp, mtcars$wt)[2, 2]
 plot(mtcars$disp, mtcars$wt)
 abline(intercept, slope)
 ```
+
+Comparison of results from `slr_output()` with `lm()`:
+```{r}
+output1 = slr_output(mtcars$disp, mtcars$wt)
+output2 = summary(lm(wt ~ disp, mtcars))
+
+# beta 0 estimates
+all.equal(output1[1, 2], output2$coefficients[1, 1])
+# beta 1 estimates
+all.equal(output1[2, 2], output2$coefficients[2, 1])
+# std error of beta 1
+all.equal(output1[3, 2], output2$coefficients[2, 2])
+# f statistic
+all.equal(output1[4, 2], as.data.frame(output2$fstatistic[1])[1, 1])
+# p value
+all.equal(output1[5, 2], as.data.frame(pf(output2$fstatistic[1], output2$fstatistic[2],
+                                          output2$fstatistic[3], lower.tail = FALSE))[1,1])
+# t statistic of beta 1
+all.equal(output1[6, 2], output2$coefficients[2, 3])
+# p value
+all.equal(output1[7, 2], output2$coefficients[2, 4])
+```
+We observe above that the relevant results generated from `slr_output()` exactly 
+matches that from `lm()`, so they are correct.
+
+```{r}
+# in terms of efficiency
+library(bench)
+set.seed(123)
+# benchmarking slr_output() against itself
+bench::mark(slr_output(mtcars$disp, mtcars$wt), slr_output(mtcars$disp, mtcars$wt))
+# benchmarking summary(lm()) against itself
+bench::mark(summary(lm(wt ~ disp, data = mtcars)), summary(lm(wt ~ disp, data = mtcars)))
+# benchmarking extracting beta 0 from slr_output against from summary(lm())
+bench::mark(slr_output(mtcars$disp, mtcars$wt)[1, 2], 
+            summary(lm(wt ~ disp, data = mtcars))$coefficients[1, 1])
+```
+Since the results produced by `slr_output()` does not look like that from `summary(lm())`,
+we cannot directly benchmark the two functions. Instead, above are 3 versions of
+benchmarking to give insights into the run time of the functions.  
+
+Under the same `mtcars` model as before:  
+Version 1: benchmarking `slr_output()` against itself gives a median bench time of
+around 240 microseconds.  
+Version 2: benchmarking `summary(lm())` against itself gives a median bench time of
+around 775 microseconds.  
+Version 3: benchmarking extracting the beta 0 estimate from `slr_output()` against doing so from `summary(lm())` gives a median bench time of 323 and 832 microseconds respectively.   
+
+It is noted that `slr_output()` is on average, approximately 3 times faster than 
+running `summary(lm())`. However, this could very likely be due to the fact that 
+the prior produces less of the results that the latter gives us.

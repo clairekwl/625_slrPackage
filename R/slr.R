@@ -48,8 +48,8 @@ slr_output <- function(x, y) {
   t_pval = 2*(1 - pt(q = t_stat, df = n-2))
 
   # generate output table
-  Name <- c("Beta 0", "Beta 1", "Std Error (Beta 1)", "F Stat",
-            "P-Value (F)", "T Stat (Beta 1)", "P-Value (T)")
+  Name <- c("Beta 0", "Beta 1", "Std Error (Beta 1)", "F Statistic",
+            "(F) P-Value", "T Statistic", "(T) P-Value")
   Estimate <- c(b0_hat, b1_hat, se_b1_hat, f_stat, f_pval, t_stat, t_pval)
   output <- data.frame(Name, Estimate)
 
