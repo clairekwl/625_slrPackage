@@ -33,9 +33,9 @@ devtools::install_github("clairekwl/625_slrPackage")
 ## Example
 
 This is a basic example which shows you how to solve a common problem.  
-We load the `mtcars` dataset from R. Suppose we want estimates for the
+We load the `iris` dataset from R. Suppose we want estimates for the
 following SLR model:  
-`wt_i = disp_i + e_i` or `Weight_i = Displacement_i + e_i`.
+`Sepal.Length_i = Sepal.Width_i + e_i`
 
 ``` r
 library(slrPackage)
