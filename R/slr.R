@@ -5,15 +5,19 @@
 #' @param x The predictor variable.
 #' @param y The outcome variable.
 #'
-#' @return The intercept and slope estimates, standard error, f and t statistics and p-values.
+#' @return The intercept and slope estimates, standard error of slope, f statistic, t statistic of slope, and corresponding p-values.
 #' @export
 #'
+#' @import stats
+#'
 #' @examples
+#' data(iris)
+#' slr_output(iris$Sepal.Width, iris$Sepal.Length)
 #' data(mtcars)
-#' slr_output(mtcars$disp, mtcars$wt)
+#' slr_output(mtcars$mpg, mtcars$wt)
 
 slr_output <- function(x, y) {
-  n = length(x)
+  n = length(x) # n same if use y
 
   # b1 estimate
   x_i = x
@@ -47,11 +51,12 @@ slr_output <- function(x, y) {
   # t stat p-value
   t_pval = 2*(1 - pt(q = t_stat, df = n-2))
 
-  # generate output table
+  # generate two columns
   Name <- c("Beta 0", "Beta 1", "Std Error (Beta 1)", "F Statistic",
             "(F) P-Value", "T Statistic", "(T) P-Value")
   Estimate <- c(b0_hat, b1_hat, se_b1_hat, f_stat, f_pval, t_stat, t_pval)
-  output <- data.frame(Name, Estimate)
 
+  # return output table
+  output <- data.frame(Name, Estimate)
   return(output)
 }

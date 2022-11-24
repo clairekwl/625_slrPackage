@@ -21,13 +21,13 @@ library(slrPackage)
 
 To use the function `slr_output`:
 ```{r}
-# load sample R dataset
+# load built-in R dataset mtcars
 data(mtcars)
-# running function: slr_output(predictor, outcome)
+# running function: slr_output(predictor, outcome) or slr_output(displacement, weight)
 slr_output(mtcars$disp, mtcars$wt)
 ```
 
-To use its results to add the least squares regression line to a plot:
+To use its results to add a least squares regression line:
 ```{r}
 intercept = slr_output(mtcars$disp, mtcars$wt)[1, 2]
 slope = slr_output(mtcars$disp, mtcars$wt)[2, 2]
@@ -41,6 +41,7 @@ Comparison of results from `slr_output()` with `lm()`:
 output1 = slr_output(mtcars$disp, mtcars$wt)
 output2 = summary(lm(wt ~ disp, mtcars))
 
+# in terms of correctness
 # beta 0 estimates
 all.equal(output1[1, 2], output2$coefficients[1, 1])
 # beta 1 estimates

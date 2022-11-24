@@ -52,7 +52,7 @@ library(slrPackage)
 ## basic example code
 
 # load sample R dataset
-data(mtcars)
+data(iris)
 # running function: slr_output(predictor, outcome)
-slr_output(mtcars$disp, mtcars$wt)
+slr_output(iris$Sepal.Width, iris$Sepal.Length)
 ```

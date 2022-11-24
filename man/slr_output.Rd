@@ -12,12 +12,14 @@ slr_output(x, y)
 \item{y}{The outcome variable.}
 }
 \value{
-The intercept and slope estimates, standard error, f and t statistics and p-values.
+The intercept and slope estimates, standard error of slope, f statistic, t statistic of slope, and corresponding p-values.
 }
 \description{
 Used to carry out simple linear regression.
 }
 \examples{
+data(iris)
+slr_output(iris$Sepal.Width, iris$Sepal.Length)
 data(mtcars)
-slr_output(mtcars$disp, mtcars$wt)
+slr_output(mtcars$mpg, mtcars$wt)
 }

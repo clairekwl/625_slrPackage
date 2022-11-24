@@ -42,15 +42,15 @@ library(slrPackage)
 ## basic example code
 
 # load sample R dataset
-data(mtcars)
+data(iris)
 # running function: slr_output(predictor, outcome)
-slr_output(mtcars$disp, mtcars$wt)
-#>                 Name     Estimate
-#> 1             Beta 0 1.599815e+00
-#> 2             Beta 1 7.010325e-03
-#> 3 Std Error (Beta 1) 6.628588e-04
-#> 4        F Statistic 1.118496e+02
-#> 5        (F) P-Value 1.222322e-11
-#> 6        T Statistic 1.057590e+01
-#> 7        (T) P-value 1.222311e-11
+slr_output(iris$Sepal.Width, iris$Sepal.Length)
+#>                 Name   Estimate
+#> 1             Beta 0  6.5262226
+#> 2             Beta 1 -0.2233611
+#> 3 Std Error (Beta 1)  0.1550809
+#> 4        F Statistic  2.0744269
+#> 5        (F) P-Value  0.1518983
+#> 6        T Statistic -1.4402871
+#> 7        (T) P-Value  1.8481017
 ```
